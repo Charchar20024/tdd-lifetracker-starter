@@ -1,0 +1,31 @@
+ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+ ul li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+ul li a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.nav-elements{
+  display: flex;
+  justify-content: space-between;
+  padding-left: 0px;
+
+}
+button{
+  background-color: transparent;
+  color: white; border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
