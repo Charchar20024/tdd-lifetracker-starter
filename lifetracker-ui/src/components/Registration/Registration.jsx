@@ -70,9 +70,11 @@ export default function Registration() {
   }
   return (
     <div className="registration">
+      <div className="card">
     <h2>Register</h2>
     <div className="form">
           <div className="input-field">
+          <label for="email">Email</label>
           <input
               type="email"
               name="email"
@@ -85,12 +87,13 @@ export default function Registration() {
           <input
               type="text"
               name="username"
-              placeholder="your_username"
+              placeholder="Username"
               value={form.username}
               onChange={handleOnInputChange}
               /><div>
               {/* <label for="firstname">First Name</label> */}
               <input
+              className="name-field"
               type="text"
               name="firstname"
               placeholder="First Name"
@@ -99,6 +102,7 @@ export default function Registration() {
               />
               {/* <label for="lastname">Last Name</label> */}
               <input
+              className="name-field"
               type="text"
               name="lastname"
               placeholder="Last Name"
@@ -106,21 +110,24 @@ export default function Registration() {
               onChange={handleOnInputChange}
               /></div>
           <div className="input-field">
+          <label for="password">Password</label>
           <input
               type="password"
               name="password"
-              placeholder="password"
+              placeholder="Password"
               value={form.password}
               onChange={handleOnInputChange}
               />
+              <label for="password">Confirm Password</label>
                 <input
               type="password"
               name="password"
-              placeholder="confirm password"
+              placeholder="Confirm Password"
               value={form.passwordConfirm}
                onChange={handleOnInputChange}
               />
           </div>   
+       </div>
        </div>
        <button className="account-btn" onClick={handleOnSubmit}>Create Account</button>
     </div>

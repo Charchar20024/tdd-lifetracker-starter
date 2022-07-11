@@ -1,20 +1,23 @@
 import * as React from "react"
+import { Link } from "react-router-dom"
 
-import "./Exercise.css"
+import "./NutritionOverview.css"
 
 
-export default function ExerciseOverview() {
+export default function NutritionOverview() {
   return (
-    <div className="exercise-page">
+    <div className="nutrition-page">
      
         <div className="banner">
-            <h1>Exercise</h1>  
+            <h1>Nutrition</h1>  
         </div>
         <div className="content">
-            <div className="exercise-overview">
+            <div className="nutrition-overview">
                 <div className="header">
                     <h3>Overview</h3>
-                    <button className="btnexercise">Add Exercise</button>
+                    <Link to="/create">
+                    <button className="btn-nutrition">Add Nutrition</button>
+                    </Link>
                 </div>
                 <div className="feed">
                     <h2>Nothing here yet.</h2>

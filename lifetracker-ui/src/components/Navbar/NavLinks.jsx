@@ -8,10 +8,11 @@ export default function NavLinks() {
         <ul className="logo">
          <li>
          <Link to="/">
-           <img src="/images/codepath.70a9a31f.svg" alt="" />
+           <img className="bt-logo" src="/images/logo-removebg-preview.png" alt="" />
          </Link>
          </li>
-        </ul>    
+        </ul>  
+       
           
         <ul>
          
@@ -21,8 +22,8 @@ export default function NavLinks() {
             </Link>
          </li>
          <li>
-         <Link to="/exercise">
-            <button className="btn-exercise">Exercise</button>
+         <Link to="/nutrition">
+            <button className="btnnutrition">Nutrition</button>
             </Link>
          </li>
          
@@ -40,7 +41,7 @@ export default function NavLinks() {
         </li>
        </ul>
             
-            
+           
 
     </div>
   )

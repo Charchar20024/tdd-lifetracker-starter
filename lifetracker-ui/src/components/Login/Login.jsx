@@ -26,25 +26,29 @@ export default function Login() {
   }
     return (
       <div className="login-page">
+        <div className="card">
+          
           <h2>Login</h2>
           <div className="form">
           <div className="input-field">
-          <input
+            <label for="email">Email</label>
+          <input className="email-field"
               type="email"
               name="email"
               placeholder="user@gmail.com"
               />
           </div>
           <div className="input-field">
-          <input
+          <label for="password">Password</label>
+          <input className="password-field"
               type="password"
               name="password"
               placeholder="password"
               />
           </div>
-          <button className="btn-login" onClick={handleOnSubmit}>Login</button>
+          <button className="btn-login1" onClick={handleOnSubmit}>Login</button>
         </div>
       </div>
-    
+    </div>
     )
   } 

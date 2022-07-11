@@ -1,8 +1,7 @@
-
 * {
     box-sizing: border-box;
 }
-.exercise-page{
+.nutrition-page{
     background-color: #2c4147;
     height: 100vh;
     display: flex;
@@ -21,7 +20,7 @@
     max-width: 800px;
     margin: 50px auto 0;
 }
-.exercise-overview{
+.nutrition-overview{
     display: flex;
     flex-direction: column;
 }
@@ -31,10 +30,11 @@
     align-items: center;
     justify-content: space-between; 
 }
-.btnexercise{
+.btn-nutrition{
     background: transparent;
     color: gold;
     border: 1px solid gold;
+    cursor:pointer;
 }
 .feed{
     display: flex;

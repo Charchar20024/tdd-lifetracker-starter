@@ -1,9 +1,14 @@
+
+* {
+     box-sizing: border-box; 
+}
 .login-page{
 background-color: #2c4147;
 height: 100vh;
 display: flex;
 flex-direction: column;
-align-content: center;
+align-items: center;
+
 
 
 
@@ -19,9 +24,11 @@ h2{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
     width: 100%;
+    
     padding-bottom: 10px;
-    color: white;  
+    color: white; 
 }
 .input-field{
     display: flex;
@@ -29,6 +36,7 @@ h2{
     align-items: flex-start;
     width: 100%;
     margin: 8px 0;
+    color: white;
     
 }
 input{
@@ -36,7 +44,22 @@ input{
     padding: 0 15px;
     font-size: 16px;
     border: solid 1px white;
-    width: 35%;
+    width: 30vw;
     background: transparent;
     color: white
+}
+.btn-login1{
+    cursor:pointer;
+    display: flex;
+    align-self: center;
+    border: solid 1px white;
+    
+}
+.email-field{
+    width: 50vw;
+
+}
+.password-field{
+    width: 50vw;
+
 }
