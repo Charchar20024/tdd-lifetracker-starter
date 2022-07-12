@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken")
-const {SECRET_KEY} = require("../config")
-const {UnauthorizedError} = require("../utils/errors")
+const { SECRET_KEY } = require("../config")
+const { UnauthorizedError } = require("../utils/errors")
 
 const jwtFrom = ({ headers }) =>{
     if(headers?.authorization){
@@ -17,7 +17,8 @@ const extractUserFromJwt = (req, res, next) =>{
         if(token){
             res.locals.user = jwt.verify(token, SECRET_KEY)
         }
-
+        
+        return next()
     } catch(error){
         return next()
     }

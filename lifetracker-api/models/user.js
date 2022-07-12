@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt")
 const db = require("../db")
+const { BCRYPT_WORK_FACTOR } = require("../config")
 
 const { UnauthorizedError, BadRequestError } = require("../utils/errors")
 
@@ -16,38 +17,37 @@ class User{
           createdAt: user.created_at,
         }
       }
-    
-    static async login(credentials){
+static async login(credentials){
+      const { email, password } = credentials
+
         const requiredFields = ["email", "password"]
-    requiredFields.forEach((property) => {
+
+      requiredFields.forEach((property) => {
       if (!credentials.hasOwnProperty(property)) {
         throw new BadRequestError(`Missing ${property} in request body.`)
       }
     })
 
-    const user = await User.fetchUserByEmail(credentials.email)
+    const user = await User.fetchUserByEmail(email)
     if (user) {
-      const isValid = await bcrypt.compare(credentials.password, user.password)
-      if (isValid === true) {
+      const isValid = await bcrypt.compare(password, user.password)
+      if (isValid) {
         return User.makePublicUser(user)
       }
     }
-
-
-
-
-     throw new UnauthorizedError("Invalid email or password combo")
+      throw new UnauthorizedError("Invalid email or password combo")
     }
 
 
     static async register(credentials){
         const requiredFields = ["username", "password", "firstName", "lastName", "email"]
+
     requiredFields.forEach((property) => {
       if (!credentials.hasOwnProperty(property)) {
         throw new BadRequestError(`Missing ${property} in request body.`)
       }})
     
-      
+    const hashedPassword = await bcrypt.hash(credentials.password, BCRYPT_WORK_FACTOR)
     const lowerCaseEmail = credentials.email.toLowerCase()
 
     const result = await db.query(
@@ -60,7 +60,7 @@ class User{
             )
          VALUES ($1, $2, $3, $4, $5)
          RETURNING id, username, password, first_name, last_name, email, created_at;
-        `, [credentials.username, credentials.password, credentials.firstName, credentials.lastName, lowerCaseEmail]
+        `, [credentials.username, hashedPassword, credentials.firstName, credentials.lastName, lowerCaseEmail]
       )
 
     const user = result.rows[0]
@@ -68,22 +68,17 @@ class User{
     return user
 }
 static async fetchUserByEmail(email) {
-    const result = await db.query(
-      `SELECT id,
-              username,
-              password, 
-              first_name AS "firstName",
-              last_name AS "lastName",
-              email,
-              created_at           
-           FROM users
-           WHERE email = $1`,
-      [email.toLowerCase()]
-    )
+    if(!email){
+      throw new BadRequestError("No email provided")
+    }
+    const query =`SELECT * FROM users WHERE email = $1`
+
+    const result = await db.query(query, [email.toLowerCase()])
 
     const user = result.rows[0]
 
     return user
-  }}
+  }
+}
 
 module.exports = User

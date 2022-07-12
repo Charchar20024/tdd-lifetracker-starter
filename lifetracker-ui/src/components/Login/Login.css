@@ -52,7 +52,7 @@ input{
     cursor:pointer;
     display: flex;
     align-self: center;
-    border: solid 1px white;
+    background-color: #00c98e;
     
 }
 .email-field{

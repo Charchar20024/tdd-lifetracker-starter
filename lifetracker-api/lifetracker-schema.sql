@@ -7,10 +7,13 @@ CREATE TABLE users (
   email      TEXT NOT  NULL UNIQUE CHECK(POSITION('@' IN email) > 1),
   created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
-CREATE TABLE exercise (
+CREATE TABLE nutrition(
   id         SERIAL PRIMARY KEY,
   name       TEXT NOT NULL,
   category   TEXT NOT NULL,
-  duration   TEXT NOT NULL,
-  intensity  TEXT NOT NULL
+  calories   INTEGER NOT NULL,
+  quantity   TEXT NOT NULL DEFAULT 1,
+  image_url  TEXT NOT NULL,
+  user_id    INTEGER NOT NULl,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );

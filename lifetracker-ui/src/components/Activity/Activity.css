@@ -9,31 +9,32 @@
     width: 100vw;
     color: white; 
     display: flex;
-    
+    flex-direction: column;
 
-    
-
+}
+.content {
+ 
+    margin: 0 auto;
 }
 .activity-header{
     display: flex;
     flex-direction: row;
     width: 100%;
     margin-top: 50px;
-    
 }
-.header-name{
+.activity-header{
     display: flex;
     flex-direction: row;
     width: 100%;
     font-size: 42px;
     color: white;
-    
 }
-.btn-nutrition{
-    background: transparent;
-    color: aqua;
-    border: 1px aqua;
-
+.button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    grid-gap: 20px;
+    gap: 20px;
 }
 .main{
     display: flex;
@@ -41,14 +42,13 @@
     width: 100%;
     margin-top: 35px;
     grid-gap: 15px;
-    gap: 15px; 
-    justify-content:flex-end;
+    gap: 15px;
 }
-.background{
-    
-    background: linear-gradient(64.7deg,#8e3232,#c96d00);;
-
-   width: 55vw;
-    padding: 16px 32px;
-    border-radius: 25px;
+.more{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 35px;
+    grid-gap: 15px;
+    gap: 15px;
 }

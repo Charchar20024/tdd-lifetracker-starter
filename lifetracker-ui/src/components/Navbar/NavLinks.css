@@ -2,6 +2,7 @@ ul {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: flex-end;
 }
  ul li {
   display: flex;
@@ -26,11 +27,15 @@ button{
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+  display: flex;
   font-size: 16px;
   cursor: pointer;
+  border: 1px solid transparent;
 }
 .bt-logo{
   width: 60px;
   cursor: pointer;
+}
+.btn-sign-up{
+  background-color: #00c98e;
 }

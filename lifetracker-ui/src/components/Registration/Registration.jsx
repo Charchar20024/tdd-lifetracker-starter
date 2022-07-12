@@ -1,10 +1,12 @@
 import * as React from "react"
-import { useState } from "react"
-//import { useNavigate, Link } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { useNavigate, Link } from "react-router-dom"
 import axios from "axios"
 import "./Registration.css"
 
-export default function Registration() {
+export default function Registration({setIsLoggedIn}) {
+  const navigate = useNavigate()
+  const [isLoading, setIsLoading] = useState(false)
   const [form, setForm] = useState({
     email: "",
     username: "",
@@ -12,11 +14,19 @@ export default function Registration() {
     lastName: "",
     password: "",
     passwordConfirm: "",
+    errors:"",
   })
+
+  // useEffect(() => {
+  //   if (user?.email) {
+  //     navigate("/")
+  //   }
+  // }, [user, navigate])
   const [errors, setErrors] = useState({})
+
   const handleOnInputChange = (event) => {
     if (event.target.name === "password") {
-      if (form.passwordConfirm && form.passwordConfirm !== event.target.value) {
+      if (form.passwordConfirm && form.password !== event.target.value) {
         setErrors((e) => ({ ...e, passwordConfirm: "Password's do not match" }))
       } else {
         setErrors((e) => ({ ...e, passwordConfirm: null }))
@@ -31,11 +41,11 @@ export default function Registration() {
       }
     }
 
-    setForm((f) => ({ ...f, [event.target.lastName]: event.target.value }))
+    setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
   }
   
   const handleOnSubmit = async () => {
-    setIsProcessing(true)
+    setIsLoading(true)
     setErrors((e) => ({ ...e, form: null }))
 
     if (form.passwordConfirm !== form.password) {
@@ -55,11 +65,13 @@ export default function Registration() {
          email: form.email,
        
       })
-      // if (res?.data?.user) {
-      //   setUser(res.data.user)
-      // } else {
-      //   setErrors((e) => ({ ...e, form: "Something went wrong with registration" }))
-      // }
+      if (res?.data?.user) {
+        setIsLoggedIn(true)
+        navigate("/activity")
+      } else {
+        setErrors((e) => ({ ...e, form: "Something went wrong with registration" }))
+      }
+     
     } catch (err) {
       console.log(err)
       //const message = err?.response?.data?.error?.message
@@ -72,6 +84,8 @@ export default function Registration() {
     <div className="registration">
       <div className="card">
     <h2>Register</h2>
+   <span className="error">{errors.form}</span>
+        <br />
     <div className="form">
           <div className="input-field">
           <label for="email">Email</label>
@@ -80,6 +94,7 @@ export default function Registration() {
               name="email"
               placeholder="Enter a vaild email"
               value={form.email}
+              onChange={handleOnInputChange}
               />
           </div>
           
@@ -90,12 +105,14 @@ export default function Registration() {
               placeholder="Username"
               value={form.username}
               onChange={handleOnInputChange}
-              /><div>
+              />
+              <br/>
+              <div>
               {/* <label for="firstname">First Name</label> */}
               <input
               className="name-field"
               type="text"
-              name="firstname"
+              name="firstName"
               placeholder="First Name"
               value={form.firstName}
               onChange={handleOnInputChange}
@@ -104,7 +121,7 @@ export default function Registration() {
               <input
               className="name-field"
               type="text"
-              name="lastname"
+              name="lastName"
               placeholder="Last Name"
               value={form.lastName}
               onChange={handleOnInputChange}
@@ -121,15 +138,15 @@ export default function Registration() {
               <label for="password">Confirm Password</label>
                 <input
               type="password"
-              name="password"
+              name="passwordConfirm"
               placeholder="Confirm Password"
               value={form.passwordConfirm}
-               onChange={handleOnInputChange}
+              onChange={handleOnInputChange}
               />
           </div>   
        </div>
        </div>
-       <button className="account-btn" onClick={handleOnSubmit}>Create Account</button>
+       <button className="account-btn" onClick={handleOnSubmit}>{isLoading ? "Loading":"Create Account"}</button>
     </div>
   )
 } 

@@ -5,17 +5,17 @@ import "./NutritionOverview.css"
 
 
 export default function NutritionOverview() {
-  return (
-    <div className="nutrition-page">
+ return (
+        <div className="nutrition-page">
      
-        <div className="banner">
+            <div className="banner">
             <h1>Nutrition</h1>  
         </div>
         <div className="content">
             <div className="nutrition-overview">
                 <div className="header">
                     <h3>Overview</h3>
-                    <Link to="/create">
+                    <Link to="/nutrition/create">
                     <button className="btn-nutrition">Add Nutrition</button>
                     </Link>
                 </div>
@@ -28,6 +28,6 @@ export default function NutritionOverview() {
         
           
 
-    </div>
-  )
+    </div>)
+  
 } 

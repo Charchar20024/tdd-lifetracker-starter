@@ -2,9 +2,10 @@ import * as React from "react"
 import "./NavLinks.css"
 import { Link } from "react-router-dom"
 
-export default function NavLinks() {
+export default function NavLinks({isLoggedIn}) {
   return (
     <div className="nav-elements">
+       
         <ul className="logo">
          <li>
          <Link to="/">
@@ -29,14 +30,15 @@ export default function NavLinks() {
          
         </ul>
         <ul>
+           
          <li>
          <Link to="/login">
-            <button className="btn-login">Login</button>
+            <button className="btn-login" disabled={isLoggedIn}>Login</button>
          </Link>
          </li>
          <li>
          <Link to="/register">
-            <button className="btn-sign-up">Sign up</button>
+            <button className="btn-sign-up">{isLoggedIn ? "Logout":"Sign up"}</button>
         </Link>
         </li>
        </ul>

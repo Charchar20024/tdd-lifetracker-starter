@@ -8,6 +8,7 @@ align-items: center;
 }
 .account-btn{
     cursor:pointer;
+    background-color: #00c98e;
 }
 .name-field{
     width: 15vw;

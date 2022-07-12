@@ -4,8 +4,14 @@ import "./NutritionNew.css"
 
 export default function NutritionNew() {
   return (
-    <div className="exercise-new">
+    <div className="nutritionNewPage">
+      <div className="Banner">
+        <h1>Nutrition</h1>
+      </div>
+      <div className="content">
+    <div className="nutrition-new">
         <div className="input-field">
+          
             <label for="name">Name</label>
         <input
               type="text"
@@ -53,6 +59,8 @@ export default function NutritionNew() {
         </div>  
       <button>Save</button>
 
+    </div>
+    </div>
     </div>
   )
 } 
