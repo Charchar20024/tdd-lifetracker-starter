@@ -40,7 +40,7 @@ Implement any of the following features to improve the application:
 
 ### Walkthrough Video
 
-![ezgif com-gif-maker-2](https://user-images.githubusercontent.com/92543813/179295525-67597de7-1ed9-4ce3-9085-49388d53087b.gif)
+![ezgif com-gif-maker-3](https://user-images.githubusercontent.com/92543813/179295994-c2b26a1d-a1c2-4664-bb30-58d67ef6e112.gif)
 
 
 ### Reflection
