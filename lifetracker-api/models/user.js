@@ -17,7 +17,7 @@ class User{
           createdAt: user.created_at,
         }
       }
-static async login(credentials){
+  static async login(credentials){
       const { email, password } = credentials
 
         const requiredFields = ["email", "password"]
@@ -46,6 +46,14 @@ static async login(credentials){
       if (!credentials.hasOwnProperty(property)) {
         throw new BadRequestError(`Missing ${property} in request body.`)
       }})
+      if (credentials.email.indexOf("@") <= 0) {
+        throw new BadRequestError("Invalid email.")
+      }
+  
+      const existingUser = await User.fetchUserByEmail(credentials.email)
+      if (existingUser) {
+        throw new BadRequestError(`A user already exists with email: ${credentials.email}`)
+      }
     
     const hashedPassword = await bcrypt.hash(credentials.password, BCRYPT_WORK_FACTOR)
     const lowerCaseEmail = credentials.email.toLowerCase()

@@ -3,6 +3,7 @@ const cors = require("cors")
 const morgan = require("morgan")
 const { PORT } = require("./config")
 const authRoutes = require("./routes/auth")
+const nutritionsRoutes = require("./routes/nutritions")
 const security = require("./middleware/security")
 
 const { NotFoundError } = require("./utils/errors")
@@ -18,7 +19,11 @@ app.use(morgan("tiny"))
 app.use(security.extractUserFromJwt)
 
 app.use("/auth", authRoutes)
+app.use("/nutrition", nutritionsRoutes)
 
+app.get("/",(req, res, next)=>{
+    return res.status(200).json({ping:"pong"})
+})
 app.use ((req, res, next)=>{
     return next(new NotFoundError())
 })

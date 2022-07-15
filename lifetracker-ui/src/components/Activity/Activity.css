@@ -28,6 +28,7 @@
     width: 100%;
     font-size: 42px;
     color: white;
+    display: inline-flex;
 }
 .button{
     display: flex;
@@ -49,6 +50,40 @@
     flex-direction: row;
     width: 100%;
     margin-top: 35px;
-    grid-gap: 15px;
-    gap: 15px;
+    grid-gap: 70px;
+    gap: 70px;
 }
+.main .background{
+    background-color: #3f5e66;
+    width: 300px;
+    height: 300px;
+    border: solid 1px white;
+    border-radius: 4px;
+}
+.main p{
+    padding: 10px;
+    margin: 25px;
+}
+.main h1{
+    padding: 10px;
+    margin: 25px;
+}
+.more .background{
+    background-color: #3f5e66;
+    width: 300px;
+    height: 100px;
+    border: solid 1px white;
+    border-radius: 4px;
+    =]
+    
+}
+.more p{
+    padding: 10px;
+    margin: 5px;
+}
+.nutrition-summary{
+    display: flex;
+    flex-direction: row;
+   
+}
+

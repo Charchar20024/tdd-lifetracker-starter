@@ -4,13 +4,14 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { Routes, Route } from "react-router-dom"
 import "./Nutrition.css"
+import apiClient from "../../services/apiClient"
 import NutritionNew from "./NutritionNew"
 import NutritionOverview from "./NutritionOverview"
+import NotFound from "components/NotFound/NotFound"
 
 
-export default function Nutrition({isLoggedIn, setIsLoggedIn}) {
+export default function Nutrition({isLoggedIn, setIsLoggedIn, setIsLoading, nutritions, setUser, user}) {
   const navigate = useNavigate()
-  const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState({})
   const [form, setForm] = useState({
     email: "",
@@ -33,31 +34,28 @@ export default function Nutrition({isLoggedIn, setIsLoggedIn}) {
     setIsLoading(true)
     setErrors((e) => ({ ...e, form: null }))
 
-    try {
-      const res = await axios.post("http://localhost:3002/auth/login", {
-        email: form.email,
-        password: form.password,
-      })
-      if (res?.data?.user) {
-        setIsLoggedIn(true)
-        navigate("/activity")
-      } else {
-        setErrors((e) => ({ ...e, form: "Invalid username/password combination" }))
-        setIsLoading(false)
-      }
-    } catch (err) {
-      console.log(err)
-    
-    }
+    const {data,error} = await apiClient.loginUser({ email: form.email, password: form.password})
+   if(error) setErrors((e) =>({...e, form:error}))
+   navigate("/nutrition")
+   if(data?.user){
+     setUser(data.user)
+     console.log(setUser)
+     apiClient.setToken(data.token)
+   }
+    setIsLoading(false)
+    setIsLoggedIn(true)
   }
+  
   if(isLoggedIn){
   return (
     <div className="nutrition-page">
         <Routes>
-            <Route path="/" element={<NutritionOverview />}/>
+            <Route path="/" element={<NutritionOverview 
+            nutritions={nutritions}
+            />}/>
             <Route path="/create" element={<NutritionNew />}/>
-            {/* 
-            <Route path="/id/:NutritionId" element={<ExerciseDetail />}/> */}
+            {/* <Route path="/id/:NutritionId" element={<NutritionDetail />}/>
+            <Route path="*" element={<NotFound />}/> */}
  
         </Routes>
         

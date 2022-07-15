@@ -1,17 +1,23 @@
 import * as React from "react"
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import axios from "axios"
+import apiClient from "../../services/apiClient"
 import "./Login.css"
 
-export default function Login({setIsLoggedIn}) {
+export default function Login({setIsLoggedIn, setUser, user, setIsLoading}) {
   const navigate = useNavigate()
-  const [isLoading, setIsLoading] = useState(false)
+  
   const [errors, setErrors] = useState({})
   const [form, setForm] = useState({
     email: "",
     password: "",
   })
+
+  // useEffect(() => {
+  //   if (user?.email) {
+  //     
+  //   }
+  // }, [user, navigate])
 
   const handleOnInputChange = (event) => {
     if (event.target.name === "email") {
@@ -29,22 +35,32 @@ export default function Login({setIsLoggedIn}) {
     setIsLoading(true)
     setErrors((e) => ({ ...e, form: null }))
 
-    try {
-      const res = await axios.post("http://localhost:3002/auth/login", {
-        email: form.email,
-        password: form.password,
-      })
-      if (res?.data?.user) {
-        setIsLoggedIn(true)
-        navigate("/activity")
-      } else {
-        setErrors((e) => ({ ...e, form: "Invalid username/password combination" }))
-        setIsLoading(false)
-      }
-    } catch (err) {
-      console.log(err)
+    const {data,error} = await apiClient.loginUser({ email: form.email, password: form.password})
+   if(error) setErrors((e) =>({...e, form:error}))
+   if(data?.user){
+     setUser(data.user)
+     console.log(setUser)
+     apiClient.setToken(data.token)
+   }
+    setIsLoading(false)
+    setIsLoggedIn(true)
+    navigate("/")
+    // try {
+    //   const res = await axios.post("http://localhost:3002/auth/login", {
+    //     email: form.email,
+    //     password: form.password,
+    //   })
+    //   if (res?.data?.user) {
+    //     
+    //     navigate("/activity")
+    //   } else {
+    //     setErrors((e) => ({ ...e, form: "Invalid username/password combination" }))
+    //     
+    //   }
+    // } catch (err) {
+    //   console.log(err)
     
-    }
+    // }
   }
     return (
       <div className="login-page">

@@ -1,12 +1,12 @@
 import * as React from "react"
 import { useEffect, useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
-import axios from "axios"
+import apiClient from "../../services/apiClient"
 import "./Registration.css"
 
-export default function Registration({setIsLoggedIn}) {
+export default function Registration({setIsLoggedIn, setUser, user, setIsLoading, isLoading}) {
   const navigate = useNavigate()
-  const [isLoading, setIsLoading] = useState(false)
+  
   const [form, setForm] = useState({
     email: "",
     username: "",
@@ -17,11 +17,11 @@ export default function Registration({setIsLoggedIn}) {
     errors:"",
   })
 
-  // useEffect(() => {
-  //   if (user?.email) {
-  //     navigate("/")
-  //   }
-  // }, [user, navigate])
+  useEffect(() => {
+    if (user?.email) {
+      
+    }
+  }, [user, navigate])
   const [errors, setErrors] = useState({})
 
   const handleOnInputChange = (event) => {
@@ -56,29 +56,41 @@ export default function Registration({setIsLoggedIn}) {
       setErrors((e) => ({ ...e, passwordConfirm: null }))
     }
 
-    try {
-      const res = await axios.post("http://localhost:3002/auth/register", {
-         username: form.username,
-         password: form.password,
-         firstName: form.firstName,
-         lastName: form.lastName,
-         email: form.email,
+    const {data,error} = await apiClient.signupUser({username: form.username,
+           password: form.password,
+           firstName: form.firstName,
+           lastName: form.lastName,
+           email: form.email})
+        if(error) setErrors((e) =>({...e, form:error}))
+        if(data?.user){
+          setUser(data.user)
+          apiClient.setToken(data.token)
+        }
+        setIsLoading(false)
+        navigate("/")
+    // try {
+    //   const res = await axios.post("http://localhost:3002/auth/register", {
+    //      username: form.username,
+    //      password: form.password,
+    //      firstName: form.firstName,
+    //      lastName: form.lastName,
+    //      email: form.email,
        
-      })
-      if (res?.data?.user) {
-        setIsLoggedIn(true)
-        navigate("/activity")
-      } else {
-        setErrors((e) => ({ ...e, form: "Something went wrong with registration" }))
-      }
+    //   })
+    //   if (res?.data?.user) {
+    //     setIsLoggedIn(true)
+    //     navigate("/activity")
+    //   } else {
+    //     setErrors((e) => ({ ...e, form: "Something went wrong with registration" }))
+    //   }
      
-    } catch (err) {
-      console.log(err)
-      //const message = err?.response?.data?.error?.message
-      //setErrors((e) => ({ ...e, form: message ?? String(err) }))
-    // } finally {
-    //   setIsProcessing(false)
-    }
+    // } catch (err) {
+    //   console.log(err)
+    //   //const message = err?.response?.data?.error?.message
+    //   //setErrors((e) => ({ ...e, form: message ?? String(err) }))
+    // // } finally {
+    // //   setIsProcessing(false)
+    // }
   }
   return (
     <div className="registration">

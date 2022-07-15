@@ -1,0 +1,35 @@
+.nutritionCard {
+    height: 350px;
+    width: 250px;
+    background-color: goldenrod;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    border: solid 1px white;
+  }
+.media {
+    height: 250px;
+    width: 100%;
+  }
+
+.info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 12px;
+  }
+.nutrition-info {
+    flex: 1;
+    display: flex;
+    
+  }
+.nutrition-name{
+  font-size: 50px;
+
+  }
+  .category{
+    align-self: flex-end;
+    border-radius: 6px;
+    border: solid 1px white;
+    width: 5vw;
+  }
