@@ -42,25 +42,3 @@ Implement any of the following features to improve the application:
 
 ![ezgif com-gif-maker-4](https://user-images.githubusercontent.com/92543813/179296917-9fb8b3cd-59d9-45c0-9fca-1df4cb491981.gif)
 
-### Reflection
-
-* Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
-
-yes i think the lab did a great job preparing me for the project.
-
-* If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
-If i had more time I would use it to finsh the rest of the features. i would also take the time to do little more CSS work to give the project more of a personal style.
-
-* Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
-
-My demo did not go as well as i would of liked, i wish i had more of the project done but sadly i did not so it was a little discouraging hving to present an incomplete project.
-
-### Open-source libraries used
-
-- Add any links to open-source libraries used in your project.
-
-### Shout out
-
-Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
-
-Shout out to all the TA for being a great support system and working with me on this project.
